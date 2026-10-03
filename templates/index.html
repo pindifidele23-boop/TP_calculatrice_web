@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <h1>Faites vos calculs, retrouvez vos opérations</h1>
+
+    <p>
+        Cette calculatrice effectue les opérations de base et garde la trace
+        de chaque calcul dans un historique que vous pouvez consulter à tout moment.
+    </p>
+
+    <p>
+        <a class="bouton" href="/calculer">Lancer un calcul</a>
+    </p>
+
+    <h2>Opérations disponibles</h2>
+    <dl>
+        <dt><strong>Addition</strong></dt>
+        <dd>Additionne deux nombres.</dd>
+
+        <dt><strong>Soustraction</strong></dt>
+        <dd>Retranche le second nombre du premier.</dd>
+
+        <dt><strong>Multiplication</strong></dt>
+        <dd>Multiplie deux nombres.</dd>
+
+        <dt><strong>Division</strong></dt>
+        <dd>Divise le premier nombre par le second. Diviser par zéro est refusé.</dd>
+    </dl>
+
+    <h2>Historique</h2>
+    <p>
+        Chaque calcul est enregistré. Ouvrez la page
+        <a href="/historique">Historique</a> pour revoir vos opérations.
+    </p>
+{% endblock %}
