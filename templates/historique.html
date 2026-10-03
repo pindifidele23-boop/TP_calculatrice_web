@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Historique{% endblock %}
+
+{% block content %}
+    <h1>Historique</h1>
+
+    {% if historique %}
+        <ol>
+            {% for operation in historique %}
+                <li>{{ operation }}</li>
+            {% endfor %}
+        </ol>
+
+        <form method="post" action="/historique/effacer">
+            <button class="bouton" type="submit">Effacer l'historique</button>
+        </form>
+    {% else %}
+        <p>Aucun calcul pour le moment. <a href="/calculer">Lancez votre premier calcul.</a></p>
+    {% endif %}
+{% endblock %}

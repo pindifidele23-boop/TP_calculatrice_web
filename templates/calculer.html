@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Calculer{% endblock %}
+
+{% block extra_head %}
+<style>
+    .formulaire { display: grid; gap: 1rem; max-width: 420px; }
+    .formulaire label { display: grid; gap: 0.25rem; font-weight: 600; }
+    .formulaire input,
+    .formulaire select {
+        padding: 0.6rem 0.75rem;
+        border: 1px solid var(--bordure);
+        border-radius: var(--rayon);
+        font-size: 1rem;
+        background: var(--surface);
+        color: var(--encre);
+    }
+    .resultat {
+        margin-top: 1.5rem;
+        padding: 1rem 1.25rem;
+        background: var(--surface);
+        border-left: 4px solid var(--accent);
+    }
+    .erreur {
+        margin-top: 1.5rem;
+        padding: 1rem 1.25rem;
+        background: #fdecea;
+        border-left: 4px solid #b3261e;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>Calculer</h1>
+
+    <form class="formulaire" method="post" action="/calculer">
+        <label>
+            Premier nombre
+            <input type="number" name="a" step="any" required value="{{ request.form.get('a', '') }}">
+        </label>
+
+        <label>
+            Opération
+            <select name="operation">
+                {% for cle, nom in operations.items() %}
+                    <option value="{{ cle }}" {% if request.form.get('operation') == cle %}selected{% endif %}>{{ nom }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Second nombre
+            <input type="number" name="b" step="any" required value="{{ request.form.get('b', '') }}">
+        </label>
+
+        <button class="bouton" type="submit">Calculer</button>
+    </form>
+
+    {% if resultat is not none %}
+        <p class="resultat" role="status">Résultat : <strong>{{ resultat }}</strong></p>
+    {% endif %}
+
+    {% if erreur %}
+        <p class="erreur" role="alert">{{ erreur }}</p>
+    {% endif %}
+{% endblock %}
